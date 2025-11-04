@@ -1,0 +1,2827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareerPath Explorer | Find Your Future Career</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --secondary: #3b82f6;
+            --accent: #f59e0b;
+            --light: #f3f4f6;
+            --dark: #1f2937;
+            --success: #10b981;
+            --danger: #ef4444;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            background-color: var(--accent);
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #e69008;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background-color: #1d4ed8;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 100px 0;
+            background: linear-gradient(rgba(37, 99, 235, 0.9), rgba(59, 130, 246, 0.85)), url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+
+        /* Stats Section */
+        .stats {
+            padding: 60px 0;
+            background-color: var(--light);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .stat-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: var(--dark);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background-color: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .section-title p {
+            font-size: 1.2rem;
+            color: var(--dark);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background-color: var(--light);
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            cursor: pointer;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .feature-details {
+            display: none;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e5e7eb;
+            text-align: left;
+        }
+
+        .feature-details.active {
+            display: block;
+        }
+
+        .feature-details ul {
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .feature-details li {
+            margin-bottom: 8px;
+        }
+
+        /* Success Stories */
+        .success-stories {
+            padding: 80px 0;
+            background-color: var(--light);
+        }
+
+        .stories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .story-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .story-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .story-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #ddd;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #777;
+            font-weight: bold;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .story-info h4 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .story-role {
+            color: var(--primary);
+            font-style: italic;
+        }
+
+        .story-quote {
+            font-style: italic;
+            color: #6b7280;
+            border-left: 3px solid var(--accent);
+            padding-left: 15px;
+        }
+
+        /* Career Quiz */
+        .career-quiz {
+            padding: 80px 0;
+            background-color: white;
+        }
+
+        .quiz-container {
+            background-color: var(--light);
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .quiz-progress {
+            height: 10px;
+            background-color: #e5e7eb;
+            border-radius: 5px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: var(--success);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .quiz-question {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            color: var(--dark);
+        }
+
+        .quiz-options {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .quiz-option {
+            padding: 15px;
+            background-color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .quiz-option:hover {
+            background-color: #e5e7eb;
+        }
+
+        .quiz-option.selected {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .quiz-navigation {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Career Paths */
+        .career-paths {
+            padding: 80px 0;
+            background-color: var(--light);
+        }
+
+        .paths-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .path-card {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            background-color: white;
+        }
+
+        .path-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .path-image {
+            height: 200px;
+            background-position: center;
+            background-size: cover;
+        }
+
+        .path-content {
+            padding: 25px;
+        }
+
+        .path-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .path-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+
+        /* Resources Section */
+        .resources {
+            padding: 80px 0;
+            background-color: white;
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .resource-card {
+            background-color: var(--light);
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .resource-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .resource-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .resource-video {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .resource-video.active {
+            display: block;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: 80px 0;
+            background-color: var(--light);
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background-color: white;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .faq-question {
+            padding: 20px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .faq-answer.active {
+            padding: 0 20px 20px;
+            max-height: 500px;
+        }
+
+        /* Newsletter */
+        .newsletter {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-align: center;
+        }
+
+        .newsletter h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+        }
+
+        .newsletter p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 50px 0 0 50px;
+            font-size: 1rem;
+        }
+
+        .newsletter-btn {
+            padding: 15px 30px;
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 0 50px 50px 0;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .newsletter-btn:hover {
+            background-color: #e69008;
+        }
+
+        /* Career Details Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 15px;
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 40px;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 28px;
+            cursor: pointer;
+            color: #6b7280;
+            transition: color 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: var(--primary);
+        }
+
+        .career-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .career-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-right: 20px;
+        }
+
+        .career-title {
+            font-size: 2.5rem;
+            color: var(--primary);
+        }
+
+        .career-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .detail-card {
+            background-color: var(--light);
+            border-radius: 12px;
+            padding: 25px;
+        }
+
+        .detail-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+        }
+
+        .detail-card h4 i {
+            margin-right: 10px;
+        }
+
+        .job-list {
+            list-style-type: none;
+        }
+
+        .job-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .job-list li:last-child {
+            border-bottom: none;
+        }
+
+        .salary {
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        /* Education Paths */
+        .education-paths {
+            display: none;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid var(--light);
+        }
+
+        .education-paths h3 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .education-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #e5e7eb;
+            flex-wrap: wrap;
+        }
+
+        .education-tab {
+            padding: 12px 25px;
+            background: none;
+            border: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #6b7280;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+
+        .education-tab.active {
+            color: var(--primary);
+            border-bottom: 3px solid var(--primary);
+        }
+
+        .education-content {
+            display: none;
+        }
+
+        .education-content.active {
+            display: block;
+        }
+
+        .education-card {
+            background-color: var(--light);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+
+        .education-card h4 {
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .education-card h4 i {
+            margin-right: 10px;
+        }
+
+        .education-list {
+            list-style-type: none;
+        }
+
+        .education-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+        }
+
+        .education-list li:last-child {
+            border-bottom: none;
+        }
+
+        .education-list i {
+            color: var(--success);
+            margin-right: 10px;
+        }
+
+        /* Mentorship Programs */
+        .mentorship-programs {
+            display: none;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid var(--light);
+        }
+
+        .mentorship-programs h3 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .mentor-card {
+            background-color: var(--light);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .mentor-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 20px;
+            background-color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #777;
+            font-size: 2rem;
+        }
+
+        .mentor-info h4 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .mentor-title {
+            color: #6b7280;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+
+        .mentor-expertise {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .expertise-tag {
+            background-color: var(--primary);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+
+        .mentor-video {
+            margin-top: 15px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .mentor-video iframe {
+            width: 100%;
+            height: 200px;
+            border: none;
+        }
+
+        /* Career Roadmap */
+        .career-roadmap {
+            display: none;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid var(--light);
+        }
+
+        .career-roadmap h3 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .roadmap-container {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .roadmap-container::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background-color: var(--primary);
+        }
+
+        .roadmap-item {
+            position: relative;
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: var(--light);
+            border-radius: 12px;
+        }
+
+        .roadmap-item::before {
+            content: '';
+            position: absolute;
+            left: -36px;
+            top: 24px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            border: 4px solid white;
+        }
+
+        .roadmap-year {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .roadmap-content h4 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .roadmap-content ul {
+            padding-left: 20px;
+            margin-bottom: 0;
+        }
+
+        .roadmap-content li {
+            margin-bottom: 5px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column a {
+            color: #d1d5db;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-column a:hover {
+            color: var(--accent);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #9ca3af;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .career-details {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                padding: 20px;
+                margin: 20px auto;
+            }
+
+            .career-title {
+                font-size: 2rem;
+            }
+
+            .education-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .education-tab {
+                width: 100%;
+                text-align: center;
+                margin-bottom: 10px;
+            }
+
+            .mentor-card {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .mentor-image {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+
+            .roadmap-container {
+                padding-left: 20px;
+            }
+
+            .roadmap-item::before {
+                left: -26px;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .newsletter-input {
+                border-radius: 50px;
+                margin-bottom: 10px;
+            }
+
+            .newsletter-btn {
+                border-radius: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <i class="fas fa-road"></i>
+                    <span>CareerPath Explorer</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#quiz">Career Quiz</a></li>
+                    <li><a href="#paths">Career Paths</a></li>
+                    <li><a href="#resources">Resources</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <a href="#quiz" class="btn">Get Started</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Discover Your Perfect Career Path</h1>
+            <p>Take our interactive assessment to explore careers that match your skills, interests, and personality. Start your journey to a fulfilling career today!</p>
+            <a href="#quiz" class="btn">Start Your Journey</a>
+            <a href="#paths" class="btn btn-secondary" style="margin-left: 15px;">Explore Careers</a>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">10,000+</div>
+                    <div class="stat-label">Students Helped</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">200+</div>
+                    <div class="stat-label">Career Paths</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">90%</div>
+                    <div class="stat-label">Satisfaction Rate</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Industry Experts</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>How We Help You Succeed</h2>
+                <p>Our comprehensive platform provides everything you need to make informed career decisions and build a successful future</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card" data-feature="assessment">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Career Assessment</h3>
+                    <p>Our scientifically-developed quiz matches your unique strengths with ideal career paths based on your personality, skills, and interests.</p>
+                    <div class="feature-details" id="assessment-details">
+                        <h4>What you'll get:</h4>
+                        <ul>
+                            <li>Personalized career matches based on your interests</li>
+                            <li>Detailed analysis of your strengths and skills</li>
+                            <li>Compatibility scores for different career fields</li>
+                            <li>Actionable insights for career planning</li>
+                            <li>Follow-up resources for each recommended career</li>
+                        </ul>
+                        <p><strong>Time required:</strong> 10-15 minutes</p>
+                    </div>
+                </div>
+                <div class="feature-card" data-feature="education">
+                    <div class="feature-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Education Guidance</h3>
+                    <p>Discover the educational requirements, best programs, and learning resources for your chosen career with our detailed guides.</p>
+                    <div class="feature-details" id="education-details">
+                        <h4>What you'll get:</h4>
+                        <ul>
+                            <li>Recommended degree programs and universities</li>
+                            <li>Scholarship and financial aid information</li>
+                            <li>Online course recommendations</li>
+                            <li>Certification requirements and options</li>
+                            <li>Timeline planning for educational goals</li>
+                        </ul>
+                        <p><strong>Includes:</strong> Both traditional and alternative education paths</p>
+                    </div>
+                </div>
+                <div class="feature-card" data-feature="insights">
+                    <div class="feature-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h3>Job Market Insights</h3>
+                    <p>Get real-time data on job growth, salary expectations, industry trends, and future opportunities in your chosen field.</p>
+                    <div class="feature-details" id="insights-details">
+                        <h4>What you'll get:</h4>
+                        <ul>
+                            <li>Current salary ranges by experience level</li>
+                            <li>Job growth projections for the next 5-10 years</li>
+                            <li>Industry trends and emerging opportunities</li>
+                            <li>Geographic demand analysis</li>
+                            <li>Skills in highest demand</li>
+                        </ul>
+                        <p><strong>Data sources:</strong> Government statistics, industry reports, and employer surveys</p>
+                    </div>
+                </div>
+                <div class="feature-card" data-feature="mentorship">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Mentorship Programs</h3>
+                    <p>Connect with experienced professionals who can guide you, answer questions, and help you navigate your career journey.</p>
+                    <div class="feature-details" id="mentorship-details">
+                        <h4>What you'll get:</h4>
+                        <ul>
+                            <li>One-on-one sessions with industry experts</li>
+                            <li>Career-specific guidance and advice</li>
+                            <li>Networking opportunities</li>
+                            <li>Resume and interview preparation</li>
+                            <li>Long-term career planning support</li>
+                        </ul>
+                        <p><strong>Mentor matching:</strong> Based on your career interests and goals</p>
+                    </div>
+                </div>
+                <div class="feature-card" data-feature="roadmaps">
+                    <div class="feature-icon">
+                        <i class="fas fa-road"></i>
+                    </div>
+                    <h3>Career Roadmaps</h3>
+                    <p>Follow step-by-step guides that outline the exact path from education to employment in your chosen career field.</p>
+                    <div class="feature-details" id="roadmaps-details">
+                        <h4>What you'll get:</h4>
+                        <ul>
+                            <li>Year-by-year action plans</li>
+                            <li>Milestone tracking and progress monitoring</li>
+                            <li>Skill development timelines</li>
+                            <li>Networking and experience-building activities</li>
+                            <li>Alternative paths and pivot options</li>
+                        </ul>
+                        <p><strong>Customizable:</strong> Adjust timelines based on your personal circumstances</p>
+                    </div>
+                </div>
+                <div class="feature-card" data-feature="resources">
+                    <div class="feature-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h3>Resource Library</h3>
+                    <p>Access our extensive collection of resume templates, interview guides, skill development resources, and more.</p>
+                    <div class="feature-details" id="resources-details">
+                        <h4>What you'll get:</h4>
+                        <ul>
+                            <li>Professional resume and cover letter templates</li>
+                            <li>Interview question banks and preparation guides</li>
+                            <li>Skill assessment tools</li>
+                            <li>Industry-specific reading lists</li>
+                            <li>Career planning worksheets and templates</li>
+                        </ul>
+                        <p><strong>Updated regularly:</strong> New resources added monthly</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Stories -->
+    <section class="success-stories">
+        <div class="container">
+            <div class="section-title">
+                <h2>Indian Success Stories</h2>
+                <p>Inspiring journeys of Indians who achieved remarkable success in their careers</p>
+            </div>
+            <div class="stories-grid">
+                <div class="story-card">
+                    <div class="story-header">
+                        <div class="story-avatar" style="background-image: url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80')"></div>
+                        <div class="story-info">
+                            <h4>Priya Sharma</h4>
+                            <div class="story-role">Software Engineer at Google</div>
+                        </div>
+                    </div>
+                    <p class="story-quote">"Coming from a small town in Rajasthan, I never imagined I'd work at Google. CareerPath Explorer helped me identify the right skills to develop and connected me with mentors who guided my journey from engineering college to Silicon Valley."</p>
+                </div>
+                <div class="story-card">
+                    <div class="story-header">
+                        <div class="story-avatar" style="background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80')"></div>
+                        <div class="story-info">
+                            <h4>Rajiv Mehta</h4>
+                            <div class="story-role">Founder of EduTech Startup</div>
+                        </div>
+                    </div>
+                    <p class="story-quote">"After working in corporate IT for 8 years, I used CareerPath Explorer to validate my entrepreneurial ideas. The market insights and mentorship program helped me launch my education technology startup, which now serves over 50,000 students across India."</p>
+                </div>
+                <div class="story-card">
+                    <div class="story-header">
+                        <div class="story-avatar" style="background-image: url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80')"></div>
+                        <div class="story-info">
+                            <h4>Dr. Ananya Reddy</h4>
+                            <div class="story-role">Cardiologist at AIIMS</div>
+                        </div>
+                    </div>
+                    <p class="story-quote">"The healthcare career roadmap helped me navigate the complex path to becoming a cardiologist. From choosing the right medical college to specializing in cardiology, every step was clearly outlined. Today, I'm living my dream of saving lives."</p>
+                </div>
+                <div class="story-card">
+                    <div class="story-header">
+                        <div class="story-avatar" style="background-image: url('https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80')"></div>
+                        <div class="story-info">
+                            <h4>Vikram Singh</h4>
+                            <div class="story-role">National Level Athlete</div>
+                        </div>
+                    </div>
+                    <p class="story-quote">"As a sports person, I needed guidance on balancing athletics with education. CareerPath Explorer showed me how to pursue sports science and build a career around my passion. Now I compete nationally while studying sports management."</p>
+                </div>
+                <div class="story-card">
+                    <div class="story-header">
+                        <div class="story-avatar" style="background-image: url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80')"></div>
+                        <div class="story-info">
+                            <h4>Neha Patel</h4>
+                            <div class="story-role">AI Research Scientist</div>
+                        </div>
+                    </div>
+                    <p class="story-quote">"The technology career path helped me transition from computer science to artificial intelligence research. The mentorship program connected me with leading AI researchers who guided my PhD applications and research direction."</p>
+                </div>
+                <div class="story-card">
+                    <div class="story-header">
+                        <div class="story-avatar" style="background-image: url('https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80')"></div>
+                        <div class="story-info">
+                            <h4>Arjun Kumar</h4>
+                            <div class="story-role">Social Entrepreneur</div>
+                        </div>
+                    </div>
+                    <p class="story-quote">"I wanted to make a difference in rural education but didn't know where to start. CareerPath Explorer helped me develop a social entrepreneurship plan and connect with impact investors. My organization now operates in 3 states."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Career Quiz -->
+    <section class="career-quiz" id="quiz">
+        <div class="container">
+            <div class="section-title">
+                <h2>Find Your Career Match</h2>
+                <p>Take our short quiz to discover careers that align with your personality, interests, and skills</p>
+            </div>
+            <div class="quiz-container">
+                <div class="quiz-progress">
+                    <div class="progress-bar" id="progress-bar"></div>
+                </div>
+                <h3 class="quiz-question" id="question">What type of activities do you enjoy most?</h3>
+                <div class="quiz-options" id="options">
+                    <div class="quiz-option">Working with technology and computers</div>
+                    <div class="quiz-option">Helping and caring for people</div>
+                    <div class="quiz-option">Creating art or designing things</div>
+                    <div class="quiz-option">Analyzing data and solving problems</div>
+                    <div class="quiz-option">Teaching or explaining concepts to others</div>
+                    <div class="quiz-option">Building or constructing things</div>
+                </div>
+                <div class="quiz-navigation">
+                    <button class="btn" id="prev-btn" disabled>Previous</button>
+                    <button class="btn" id="next-btn">Next</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Career Paths -->
+    <section class="career-paths" id="paths">
+        <div class="container">
+            <div class="section-title">
+                <h2>Explore Career Paths</h2>
+                <p>Discover various career options across different industries and fields with detailed information</p>
+            </div>
+            <div class="paths-grid">
+                <div class="path-card" data-career="technology">
+                    <div class="path-image" style="background-image: url('https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80')"></div>
+                    <div class="path-content">
+                        <h3>Technology & IT</h3>
+                        <p>Explore careers in software development, cybersecurity, data science, AI, and more in the rapidly growing tech industry.</p>
+                        <div class="path-meta">
+                            <span><i class="fas fa-chart-line"></i> 13% Growth</span>
+                            <span><i class="fas fa-dollar-sign"></i> ₹85K-₹150K</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="path-card" data-career="healthcare">
+                    <div class="path-image" style="background-image: url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80')"></div>
+                    <div class="path-content">
+                        <h3>Healthcare</h3>
+                        <p>Discover rewarding careers in medicine, nursing, therapy, medical research, and other health-related professions.</p>
+                        <div class="path-meta">
+                            <span><i class="fas fa-chart-line"></i> 16% Growth</span>
+                            <span><i class="fas fa-dollar-sign"></i> ₹60K-₹200K+</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="path-card" data-career="business">
+                    <div class="path-image" style="background-image: url('https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80')"></div>
+                    <div class="path-content">
+                        <h3>Business & Finance</h3>
+                        <p>Learn about careers in management, marketing, accounting, finance, entrepreneurship, and corporate leadership.</p>
+                        <div class="path-meta">
+                            <span><i class="fas fa-chart-line"></i> 8% Growth</span>
+                            <span><i class="fas fa-dollar-sign"></i> ₹50K-₹150K+</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="path-card" data-career="creative">
+                    <div class="path-image" style="background-image: url('https://images.unsplash.com/photo-1545235617-9465d2a55698?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80')"></div>
+                    <div class="path-content">
+                        <h3>Creative Arts</h3>
+                        <p>Explore careers in graphic design, writing, film, music, photography, and other creative industries.</p>
+                        <div class="path-meta">
+                            <span><i class="fas fa-chart-line"></i> 4% Growth</span>
+                            <span><i class="fas fa-dollar-sign"></i> ₹40K-₹120K</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="path-card" data-career="education">
+                    <div class="path-image" style="background-image: url('https://images.unsplash.com/photo-1509062522246-3755977927d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80')"></div>
+                    <div class="path-content">
+                        <h3>Education</h3>
+                        <p>Discover careers in teaching, administration, curriculum development, educational technology, and counseling.</p>
+                        <div class="path-meta">
+                            <span><i class="fas fa-chart-line"></i> 5% Growth</span>
+                            <span><i class="fas fa-dollar-sign"></i> ₹45K-₹100K</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="path-card" data-career="engineering">
+                    <div class="path-image" style="background-image: url('https://content.jdmagicbox.com/comp/pune/h2/020pxx20.xx20.110928100932.r3h2/catalogue/rmd-sinhgad-school-of-management-studies-warje-pune-institutes-2scpqyi.jpg')"></div>
+                    <div class="path-content">
+                        <h3>Engineering</h3>
+                        <p>Learn about careers in civil, mechanical, electrical, chemical, and other engineering specialties.</p>
+                        <div class="path-meta">
+                            <span><i class="fas fa-chart-line"></i> 7% Growth</span>
+                            <span><i class="fas fa-dollar-sign"></i> ₹70K-₹130K</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section class="resources" id="resources">
+        <div class="container">
+            <div class="section-title">
+                <h2>Career Resources</h2>
+                <p>Access our library of tools and resources to support your career journey</p>
+            </div>
+            <div class="resources-grid">
+                <div class="resource-card" data-resource="resume">
+                    <div class="resource-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h3>Resume Builder</h3>
+                    <p>Create professional resumes with our easy-to-use templates and expert guidance. Learn how to highlight your skills and experience effectively.</p>
+                    <div class="resource-video" id="resume-video">
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/y3R9e2L8I9E" title="Resume Building Tips" allowfullscreen></iframe>
+                        </div>
+                        <p style="margin-top: 10px; font-size: 0.9rem; color: #6b7280;">Learn how to create a standout resume that gets noticed by employers</p>
+                    </div>
+                </div>
+                <div class="resource-card" data-resource="interview">
+                    <div class="resource-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3>Interview Prep</h3>
+                    <p>Practice with common interview questions and get feedback on your responses. Master techniques to handle behavioral and technical interviews.</p>
+                    <div class="resource-video" id="interview-video">
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/KukmClH1KoA" title="Interview Preparation" allowfullscreen></iframe>
+                        </div>
+                        <p style="margin-top: 10px; font-size: 0.9rem; color: #6b7280;">Master the art of interviewing with these proven techniques</p>
+                    </div>
+                </div>
+                <div class="resource-card" data-resource="skills">
+                    <div class="resource-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3>Skill Development</h3>
+                    <p>Access courses and tutorials to build the skills needed for your chosen career. Identify skill gaps and create personalized learning paths.</p>
+                    <div class="resource-video" id="skills-video">
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/JJjBPBWaeYU" title="Skill Development" allowfullscreen></iframe>
+                        </div>
+                        <p style="margin-top: 10px; font-size: 0.9rem; color: #6b7280;">Develop in-demand skills that employers are looking for</p>
+                    </div>
+                </div>
+                <div class="resource-card" data-resource="networking">
+                    <div class="resource-icon">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <h3>Networking Guide</h3>
+                    <p>Learn how to build professional connections and expand your career network. Master both online and offline networking strategies.</p>
+                    <div class="resource-video" id="networking-video">
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/vWai9foSkhg" title="Professional Networking" allowfullscreen></iframe>
+                        </div>
+                        <p style="margin-top: 10px; font-size: 0.9rem; color: #6b7280;">Build meaningful professional relationships that advance your career</p>
+                    </div>
+                </div>
+                <div class="resource-card" data-resource="jobsearch">
+                    <div class="resource-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>Job Search Tools</h3>
+                    <p>Find job openings, track applications, and optimize your search strategy. Learn how to use job boards effectively and leverage referrals.</p>
+                    <div class="resource-video" id="jobsearch-video">
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/8OTxZyR3tBE" title="Job Search Strategies" allowfullscreen></iframe>
+                        </div>
+                        <p style="margin-top: 10px; font-size: 0.9rem; color: #6b7280;">Effective strategies to find and land your dream job</p>
+                    </div>
+                </div>
+                <div class="resource-card" data-resource="scholarship">
+                    <div class="resource-icon">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <h3>Scholarship Finder</h3>
+                    <p>Discover scholarships and financial aid options for your education. Learn how to write compelling scholarship applications.</p>
+                    <div class="resource-video" id="scholarship-video">
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/4bnbUjLxGig" title="Scholarship Guide" allowfullscreen></iframe>
+                        </div>
+                        <p style="margin-top: 10px; font-size: 0.9rem; color: #6b7280;">Find and apply for scholarships to fund your education</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq">
+        <div class="container">
+            <div class="section-title">
+                <h2>Frequently Asked Questions</h2>
+                <p>Find answers to common questions about career planning and our services</p>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How accurate is the career assessment quiz?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Our career assessment is based on established career theory and has been validated with thousands of users. While no assessment can be 100% accurate, our quiz has shown a 85% satisfaction rate among users who followed our recommendations.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Is this service completely free?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Yes, our basic career exploration tools, assessment quiz, and resource library are completely free. We offer premium services like one-on-one mentorship and detailed career planning for a fee, but the core features remain free.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How often is the career information updated?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        We update our career data quarterly to reflect the latest job market trends, salary information, and educational requirements. Our team continuously monitors industry changes to ensure you have the most current information.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Can I use this if I'm considering a career change?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Absolutely! Our platform is designed for students exploring their first career as well as professionals considering a career change. We provide specific guidance for career changers, including transferable skills assessment and transition strategies.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <div class="container">
+            <h2>Stay Updated on Career Opportunities</h2>
+            <p>Subscribe to our newsletter for the latest career insights, job market trends, and exclusive resources</p>
+            <form class="newsletter-form">
+                <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
+                <button type="submit" class="newsletter-btn">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Career Details Modal -->
+    <div class="modal" id="career-modal">
+        <div class="modal-content">
+            <span class="close-modal" id="close-modal">&times;</span>
+            <div id="modal-body">
+                <!-- Content will be inserted by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>CareerPath Explorer</h3>
+                    <p>Helping young people discover their ideal career paths through innovative assessment tools and comprehensive resources.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/_sanchit_15?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#quiz">Career Quiz</a></li>
+                        <li><a href="#paths">Career Paths</a></li>
+                        <li><a href="#resources">Resources</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Career Blog</a></li>
+                        <li><a href="#">Salary Guide</a></li>
+                        <li><a href="#">Education Resources</a></li>
+                        <li><a href="#">Job Search Tips</a></li>
+                        <li><a href="#">Interview Preparation</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> info@careerpathexplorer.com</li>
+                        <li><i class="fas fa-phone"></i> +91 9356854069</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Education St, Career City</li>
+                        <li><i class="fas fa-clock"></i> Mon-Fri: 9AM-6PM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 CareerPath Explorer. All rights reserved. | <a href="#" style="color: #d1d5db;">Privacy Policy</a> | <a href="#" style="color: #d1d5db;">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Enhanced career data with more fields
+        const careerData = {
+            technology: {
+                title: "Technology & IT",
+                icon: "fas fa-laptop-code",
+                description: "The technology sector continues to be one of the fastest-growing industries worldwide, offering diverse career opportunities with competitive salaries and excellent growth potential. From software development to cybersecurity, this field offers innovation and continuous learning.",
+                growth: "13% (Much faster than average)",
+                demand: "High demand across all specialties",
+                jobs: [
+                    { title: "Software Developer", salary: "₹110,000" },
+                    { title: "Data Scientist", salary: "₹98,000" },
+                    { title: "Cybersecurity Analyst", salary: "₹103,000" },
+                    { title: "IT Manager", salary: "₹120,000" },
+                    { title: "Cloud Architect", salary: "₹130,000" },
+                    { title: "AI Engineer", salary: "₹125,000" }
+                ],
+                education: "Most positions require a bachelor's degree in computer science, information technology, or related fields. Certifications can also enhance job prospects. Many successful professionals are self-taught or complete coding bootcamps.",
+                skills: "Programming, problem-solving, analytical thinking, creativity, communication, continuous learning, teamwork, project management.",
+                educationPaths: {
+                    degrees: [
+                        "Bachelor's in Computer Science",
+                        "Bachelor's in Information Technology",
+                        "Bachelor's in Software Engineering",
+                        "Master's in Data Science",
+                        "Master's in Cybersecurity",
+                        "Bachelor's in Computer Engineering"
+                    ],
+                    certifications: [
+                        "AWS Certified Solutions Architect",
+                        "CompTIA Security+",
+                        "Certified Information Systems Security Professional (CISSP)",
+                        "Google Cloud Professional Developer",
+                        "Microsoft Certified: Azure Solutions Architect",
+                        "Certified Ethical Hacker (CEH)"
+                    ],
+                    resources: [
+                        "Codecademy - Interactive coding lessons",
+                        "Coursera - University computer science courses",
+                        "edX - CS50 from Harvard University",
+                        "FreeCodeCamp - Free coding curriculum",
+                        "Udacity - Nanodegree programs",
+                        "LeetCode - Coding interview preparation"
+                    ]
+                },
+                mentorship: [
+                    {
+                        name: "Sarah Johnson",
+                        title: "Senior Software Engineer at Google",
+                        image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23ddd'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='12' fill='%23777'%3ETech%3C/text%3E%3C/svg%3E",
+                        expertise: ["Web Development", "Cloud Computing", "AI"],
+                        bio: "10+ years of experience in software development. Specialized in building scalable web applications and mentoring junior developers.",
+                        videoId: "https://www.youtube.com/embed/wjR_n2T2w6M"
+                    },
+                    {
+                        name: "Michael Chen",
+                        title: "Data Science Lead at Microsoft",
+                        image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23ddd'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='12' fill='%23777'%3ETech%3C/text%3E%3C/svg%3E",
+                        expertise: ["Machine Learning", "Data Analysis", "Python"],
+                        bio: "8+ years in data science with expertise in machine learning and big data analytics. Passionate about helping newcomers enter the field.",
+                        videoId: "https://www.youtube.com/embed/ua-CiDNNjD0"
+                    }
+                ],
+                roadmap: [
+                    {
+                        year: "Year 1-2",
+                        title: "Foundation Building",
+                        tasks: [
+                            "Learn programming fundamentals (Python, JavaScript, Java)",
+                            "Complete introductory computer science courses",
+                            "Build simple projects to apply knowledge",
+                            "Explore different tech specializations",
+                            "Join coding communities and attend meetups"
+                        ]
+                    },
+                    {
+                        year: "Year 2-3",
+                        title: "Skill Development",
+                        tasks: [
+                            "Master data structures and algorithms",
+                            "Complete a specialization (web dev, mobile, data science)",
+                            "Build a portfolio of 3-5 significant projects",
+                            "Contribute to open source projects",
+                            "Start networking with professionals in your field"
+                        ]
+                    },
+                    {
+                        year: "Year 3-4",
+                        title: "Internship & Professional Experience",
+                        tasks: [
+                            "Apply for internships at tech companies",
+                            "Gain experience with industry-standard tools and workflows",
+                            "Develop soft skills (communication, teamwork)",
+                            "Create a professional online presence",
+                            "Begin job application process"
+                        ]
+                    },
+                    {
+                        year: "Year 4-5",
+                        title: "Entry-Level Career",
+                        tasks: [
+                            "Secure full-time position in chosen specialty",
+                            "Continue learning new technologies",
+                            "Find a mentor within your organization",
+                            "Consider additional certifications",
+                            "Build professional network"
+                        ]
+                    },
+                    {
+                        year: "Year 5-6",
+                        title: "Career Advancement",
+                        tasks: [
+                            "Seek opportunities for increased responsibility",
+                            "Consider specialization in emerging technologies",
+                            "Explore leadership or senior technical roles",
+                            "Consider advanced education if needed",
+                            "Mentor junior developers"
+                        ]
+                    },
+                    {
+                        year: "Year 6+",
+                        title: "Established Professional",
+                        tasks: [
+                            "Consider moving into senior or lead positions",
+                            "Explore management or architect roles",
+                            "Contribute to industry through speaking or writing",
+                            "Continue lifelong learning",
+                            "Consider entrepreneurship or consulting"
+                        ]
+                    }
+                ]
+            },
+            healthcare: {
+                title: "Healthcare",
+                icon: "fas fa-heartbeat",
+                description: "Healthcare offers rewarding careers with the opportunity to make a difference in people's lives. The industry is growing rapidly due to an aging population and advances in medical technology. Careers range from direct patient care to research and administration.",
+                growth: "16% (Much faster than average)",
+                demand: "Very high demand, especially in nursing and specialized care",
+                jobs: [
+                    { title: "Registered Nurse", salary: "₹78,000" },
+                    { title: "Physician Assistant", salary: "₹115,000" },
+                    { title: "Physical Therapist", salary: "₹91,000" },
+                    { title: "Medical Sonographer", salary: "₹75,000" },
+                    { title: "Healthcare Administrator", salary: "₹104,000" },
+                    { title: "Pharmacist", salary: "₹128,000" }
+                ],
+                education: "Requirements vary from certificates and associate degrees to doctoral degrees, depending on the specific career path. Clinical roles require licensure and continuing education.",
+                skills: "Empathy, attention to detail, communication, problem-solving, technical skills, ability to work under pressure, teamwork, cultural competence.",
+                educationPaths: {
+                    degrees: [
+                        "Bachelor of Science in Nursing (BSN)",
+                        "Doctor of Medicine (MD)",
+                        "Doctor of Pharmacy (PharmD)",
+                        "Master of Public Health (MPH)",
+                        "Bachelor of Health Administration",
+                        "Associate Degree in Nursing (ADN)"
+                    ],
+                    certifications: [
+                        "Registered Nurse (RN) License",
+                        "Certified Medical Assistant (CMA)",
+                        "Basic Life Support (BLS) Certification",
+                        "Advanced Cardiac Life Support (ACLS)",
+                        "Certified Healthcare Administrator",
+                        "Pharmacy Technician Certification"
+                    ],
+                    resources: [
+                        "Khan Academy - Health and medicine content",
+                        "Coursera - Healthcare specialization courses",
+                        "edX - Public health courses",
+                        "American Heart Association - BLS/ACLS training",
+                        "National Healthcareer Association - Certification prep",
+                        "CDC Training - Public health resources"
+                    ]
+                },
+                mentorship: [
+                    {
+                        name: "Dr. Robert Mitchell",
+                        title: "Chief of Surgery at City Hospital",
+                        image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23ddd'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='12' fill='%23777'%3EDoctor%3C/text%3E%3C/svg%3E",
+                        expertise: ["Surgery", "Medical Education", "Healthcare Leadership"],
+                        bio: "20+ years of surgical experience with a passion for mentoring the next generation of healthcare professionals. Completed residency at Johns Hopkins.",
+                        videoId: "https://www.youtube.com/embed/0xVn2b5i5cM"
+                    },
+                    {
+                        name: "Dr. Priya Patel",
+                        title: "Pediatric Specialist",
+                        image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23ddd'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='12' fill='%23777'%3EDoctor%3C/text%3E%3C/svg%3E",
+                        expertise: ["Pediatrics", "Child Development", "Healthcare Policy"],
+                        bio: "15+ years working with children and families. Passionate about improving healthcare access for underserved communities.",
+                        videoId: "https://www.youtube.com/embed/8FpPsPS_exw"
+                    }
+                ],
+                roadmap: [
+                    {
+                        year: "Year 1-2",
+                        title: "Pre-Professional Preparation",
+                        tasks: [
+                            "Complete prerequisite science courses (biology, chemistry)",
+                            "Gain healthcare exposure (volunteering, shadowing)",
+                            "Maintain high GPA for competitive programs",
+                            "Research different healthcare careers",
+                            "Develop communication and empathy skills"
+                        ]
+                    },
+                    {
+                        year: "Year 2-3",
+                        title: "Professional Education",
+                        tasks: [
+                            "Enroll in healthcare program (nursing, medical school, etc.)",
+                            "Focus on core healthcare knowledge",
+                            "Begin clinical rotations or practical experience",
+                            "Develop specialized interests",
+                            "Build relationships with faculty and professionals"
+                        ]
+                    },
+                    {
+                        year: "Year 3-4",
+                        title: "Clinical Experience",
+                        tasks: [
+                            "Complete required clinical rotations",
+                            "Develop hands-on patient care skills",
+                            "Explore different specialties through rotations",
+                            "Prepare for licensure exams",
+                            "Begin building professional network"
+                        ]
+                    },
+                    {
+                        year: "Year 4-5",
+                        title: "Licensure & Residency",
+                        tasks: [
+                            "Pass required licensure exams",
+                            "Complete residency or internship program",
+                            "Choose specialty area",
+                            "Develop advanced clinical skills",
+                            "Apply for fellowships if pursuing specialization"
+                        ]
+                    },
+                    {
+                        year: "Year 5-6",
+                        title: "Early Career",
+                        tasks: [
+                            "Begin practice in chosen specialty",
+                            "Continue professional development",
+                            "Join professional organizations",
+                            "Consider research opportunities",
+                            "Develop work-life balance strategies"
+                        ]
+                    },
+                    {
+                        year: "Year 6+",
+                        title: "Career Advancement",
+                        tasks: [
+                            "Consider leadership or administrative roles",
+                            "Pursue additional certifications or sub-specialties",
+                            "Engage in teaching or mentoring",
+                            "Contribute to research or policy",
+                            "Consider private practice or academic medicine"
+                        ]
+                    }
+                ]
+            },
+            business: {
+                title: "Business & Finance",
+                icon: "fas fa-chart-line",
+                description: "Business and finance careers involve helping organizations manage their operations, finances, and strategies. These roles are essential across all industries and offer diverse career paths with opportunities for advancement and entrepreneurship.",
+                growth: "8% (Faster than average)",
+                demand: "Steady demand with competitive entry-level positions",
+                jobs: [
+                    { title: "Financial Analyst", salary: "₹83,000" },
+                    { title: "Marketing Manager", salary: "₹135,000" },
+                    { title: "HR Specialist", salary: "₹62,000" },
+                    { title: "Accountant", salary: "₹73,000" },
+                    { title: "Management Consultant", salary: "₹87,000" },
+                    { title: "Business Development Manager", salary: "₹95,000" }
+                ],
+                education: "Most positions require at least a bachelor's degree in business, finance, economics, or related fields. Advanced degrees can enhance career progression. Certifications are valuable in specialized areas.",
+                skills: "Analytical thinking, communication, leadership, problem-solving, financial literacy, strategic planning, negotiation, data analysis, project management.",
+                educationPaths: {
+                    degrees: [
+                        "Bachelor's in Business Administration",
+                        "Bachelor's in Finance",
+                        "Master of Business Administration (MBA)",
+                        "Bachelor's in Accounting",
+                        "Master's in Finance",
+                        "Bachelor's in Economics"
+                    ],
+                    certifications: [
+                        "Chartered Financial Analyst (CFA)",
+                        "Certified Public Accountant (CPA)",
+                        "Project Management Professional (PMP)",
+                        "Certified Management Accountant (CMA)",
+                        "Professional in Human Resources (PHR)",
+                        "Six Sigma Certification"
+                    ],
+                    resources: [
+                        "Coursera - Business specialization courses",
+                        "edX - MBA preview courses",
+                        "Khan Academy - Finance and capital markets",
+                        "Investopedia - Financial education",
+                        "Harvard Business Review - Case studies and insights",
+                        "Wall Street Prep - Financial modeling"
+                    ]
+                },
+                mentorship: [
+                    {
+                        name: "Jennifer Lee",
+                        title: "VP of Finance at Fortune 500 Company",
+                        image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23ddd'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='12' fill='%23777'%3EFinance%3C/text%3E%3C/svg%3E",
+                        expertise: ["Corporate Finance", "Strategic Planning", "Risk Management"],
+                        bio: "15+ years of experience in corporate finance with expertise in financial strategy and risk assessment. MBA from Wharton.",
+                        videoId: "https://www.youtube.com/embed/L0KjYk8j2bA"
+                    },
+                    {
+                        name: "David Martinez",
+                        title: "Marketing Director",
+                        image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23ddd'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='12' fill='%23777'%3EMarketing%3C/text%3E%3C/svg%3E",
+                        expertise: ["Digital Marketing", "Brand Strategy", "Consumer Behavior"],
+                        bio: "12+ years in marketing with experience in both traditional and digital channels. Led successful campaigns for major brands.",
+                        videoId: "https://www.youtube.com/embed/3Gm94_1i8vI"
+                    }
+                ],
+                roadmap: [
+                    {
+                        year: "Year 1-2",
+                        title: "Foundation Building",
+                        tasks: [
+                            "Pursue bachelor's degree in business/finance",
+                            "Complete internships in various business functions",
+                            "Develop analytical and software skills (Excel, SQL)",
+                            "Join business-related student organizations",
+                            "Build professional network"
+                        ]
+                    },
+                    {
+                        year: "Year 2-3",
+                        title: "Specialization",
+                        tasks: [
+                            "Choose area of concentration (finance, marketing, etc.)",
+                            "Take advanced courses in chosen field",
+                            "Complete specialized internships",
+                            "Develop relevant technical skills",
+                            "Begin building professional portfolio"
+                        ]
+                    },
+                    {
+                        year: "Year 3-4",
+                        title: "Professional Development",
+                        tasks: [
+                            "Pursue relevant certifications",
+                            "Complete capstone projects or case competitions",
+                            "Develop leadership skills through extracurriculars",
+                            "Consider graduate education options",
+                            "Build relationships with industry professionals"
+                        ]
+                    },
+                    {
+                        year: "Year 4-5",
+                        title: "Entry-Level Career",
+                        tasks: [
+                            "Secure position in chosen field",
+                            "Learn company-specific processes and systems",
+                            "Develop industry knowledge",
+                            "Build internal network",
+                            "Consider additional certifications"
+                        ]
+                    },
+                    {
+                        year: "Year 5-6",
+                        title: "Career Advancement",
+                        tasks: [
+                            "Seek opportunities for increased responsibility",
+                            "Consider specialization or advanced roles",
+                            "Develop management or leadership skills",
+                            "Consider graduate education if beneficial",
+                            "Expand professional network"
+                        ]
+                    },
+                    {
+                        year: "Year 6+",
+                        title: "Established Professional",
+                        tasks: [
+                            "Pursue management or senior positions",
+                            "Consider entrepreneurship or consulting",
+                            "Develop industry expertise",
+                            "Mentor junior professionals",
+                            "Consider executive education"
+                        ]
+                    }
+                ]
+            },
+            creative: {
+                title: "Creative Arts",
+                icon: "fas fa-palette",
+                description: "Creative careers allow you to express your artistic talents while building a professional career. From graphic design to film production, these fields combine creativity with technical skills and business acumen.",
+                growth: "4% (As fast as average)",
+                demand: "Varies by specialty, with high demand in digital media",
+                jobs: [
+                    { title: "Graphic Designer", salary: "₹52,000" },
+                    { title: "UX/UI Designer", salary: "₹85,000" },
+                    { title: "Content Writer", salary: "₹55,000" },
+                    { title: "Video Editor", salary: "₹60,000" },
+                    { title: "Art Director", salary: "₹95,000" },
+                    { title: "Photographer", salary: "₹45,000" }
+                ],
+                education: "Formal education ranges from certificates to bachelor's degrees. Portfolio quality often matters more than specific degrees. Many successful creatives are self-taught.",
+                skills: "Creativity, technical proficiency, communication, time management, adaptability, client relations, visual thinking, storytelling.",
+                educationPaths: {
+                    degrees: [
+                        "Bachelor's in Graphic Design",
+                        "Bachelor's in Fine Arts",
+                        "Bachelor's in Film Production",
+                        "Bachelor's in Communication Design",
+                        "Associate Degree in Digital Media",
+                        "Certificate in UX Design"
+                    ],
+                    certifications: [
+                        "Adobe Certified Expert",
+                        "Google UX Design Certificate",
+                        "HubSpot Content Marketing Certification",
+                        "Professional Photographer Certification",
+                        "Autodesk Certified Professional"
+                    ],
+                    resources: [
+                        "Skillshare - Creative classes",
+                        "Behance - Portfolio inspiration",
+                        "Dribbble - Design community",
+                        "CreativeLive - Photography and art courses",
+                        "Lynda/LinkedIn Learning - Creative software training",
+                        "99designs - Design contests and resources"
+                    ]
+                },
+                mentorship: [
+                    {
+                        name: "Alex Morgan",
+                        title: "Creative Director at Design Studio",
+                        image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23ddd'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='12' fill='%23777'%3EDesign%3C/text%3E%3C/svg%3E",
+                        expertise: ["Brand Identity", "Creative Direction", "Design Thinking"],
+                        bio: "15+ years in creative direction with award-winning campaigns. Passionate about mentoring emerging designers and helping them build strong portfolios.",
+                        videoId: "https://www.youtube.com/embed/5M2aL5eG9kM"
+                    },
+                    {
+                        name: "Sophia Rodriguez",
+                        title: "Film Director",
+                        image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23ddd'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='12' fill='%23777'%3EFilm%3C/text%3E%3C/svg%3E",
+                        expertise: ["Filmmaking", "Storytelling", "Visual Effects"],
+                        bio: "10+ years in film and video production. Worked on documentaries, commercials, and short films. Passionate about helping new filmmakers find their voice.",
+                        videoId: "https://www.youtube.com/embed/0rN5W8o6d0M"
+                    }
+                ],
+                roadmap: [
+                    {
+                        year: "Year 1-2",
+                        title: "Skill Development & Exploration",
+                        tasks: [
+                            "Learn fundamental creative software (Adobe Creative Suite)",
+                            "Build basic portfolio with personal projects",
+                            "Explore different creative specialties",
+                            "Take foundational art and design courses",
+                            "Join online creative communities"
+                        ]
+                    },
+                    {
+                        year: "Year 2-3",
+                        title: "Portfolio Development",
+                        tasks: [
+                            "Create specialized projects for portfolio",
+                            "Develop personal style and voice",
+                            "Seek feedback from professionals",
+                            "Participate in design challenges or competitions",
+                            "Begin building online presence"
+                        ]
+                    },
+                    {
+                        year: "Year 3-4",
+                        title: "Professional Experience",
+                        tasks: [
+                            "Seek internships or freelance opportunities",
+                            "Collaborate on creative projects",
+                            "Develop client management skills",
+                            "Build professional network",
+                            "Consider specialized education or workshops"
+                        ]
+                    },
+                    {
+                        year: "Year 4-5",
+                        title: "Entry-Level Career",
+                        tasks: [
+                            "Secure position in creative field",
+                            "Develop industry-specific skills",
+                            "Learn client relations and project management",
+                            "Continue building portfolio with professional work",
+                            "Seek mentorship from experienced creatives"
+                        ]
+                    },
+                    {
+                        year: "Year 5-6",
+                        title: "Career Advancement",
+                        tasks: [
+                            "Develop specialization or niche",
+                            "Seek leadership or senior creative roles",
+                            "Consider starting own creative business",
+                            "Build personal brand",
+                            "Expand professional network"
+                        ]
+                    },
+                    {
+                        year: "Year 6+",
+                        title: "Established Creative",
+                        tasks: [
+                            "Pursue director or senior creative positions",
+                            "Consider entrepreneurship or consulting",
+                            "Develop industry expertise",
+                            "Mentor emerging creatives",
+                            "Consider teaching or workshops"
+                        ]
+                    }
+                ]
+            },
+            education: {
+                title: "Education",
+                icon: "fas fa-chalkboard-teacher",
+                description: "Education careers focus on teaching, administration, and supporting learning at all levels. These roles make a significant impact on individuals and communities while offering stability and fulfillment.",
+                growth: "5% (As fast as average)",
+                demand: "Steady demand, with shortages in STEM and special education",
+                jobs: [
+                    { title: "Elementary Teacher", salary: "₹60,000" },
+                    { title: "High School Teacher", salary: "₹62,000" },
+                    { title: "School Counselor", salary: "₹58,000" },
+                    { title: "Curriculum Developer", salary: "₹65,000" },
+                    { title: "Principal", salary: "₹98,000" },
+                    { title: "Education Consultant", salary: "₹75,000" }
+                ],
+                education: "Teaching positions require at least a bachelor's degree and state certification. Administrative roles typically require a master's degree. Continuing education is essential for career advancement.",
+                skills: "Communication, patience, organization, adaptability, leadership, empathy, subject matter expertise, classroom management.",
+                educationPaths: {
+                    degrees: [
+                        "Bachelor's in Education",
+                        "Master's in Teaching",
+                        "Master's in Education Administration",
+                        "Bachelor's in Subject Area + Teaching Certificate",
+                        "Doctorate in Education",
+                        "Master's in School Counseling"
+                    ],
+                    certifications: [
+                        "State Teaching Certification",
+                        "National Board Certification",
+                        "ESL Teaching Certificate",
+                        "Special Education Certification",
+                        "School Administrator License",
+                        "Gifted Education Certification"
+                    ],
+                    resources: [
+                        "Edutopia - Teaching strategies and resources",
+                        "Teachers Pay Teachers - Lesson plans and materials",
+                        "Coursera - Education courses",
+                        "Khan Academy - Teaching resources",
+                        "National Education Association - Professional development",
+                        "ASCD - Educational leadership resources"
+                    ]
+                },
+                mentorship: [
+                    {
+                        name: "Dr. Lisa Thompson",
+                        title: "High School Principal",
+                        image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23ddd'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='12' fill='%23777'%3EEducation%3C/text%3E%3C/svg%3E",
+                        expertise: ["Educational Leadership", "Curriculum Development", "Teacher Mentoring"],
+                        bio: "20+ years in education with experience as teacher, department head, and principal. Dedicated to supporting new educators.",
+                        videoId: "https://www.youtube.com/embed/5p2sJ1b2i6E"
+                    },
+                    {
+                        name: "James Wilson",
+                        title: "Education Technology Specialist",
+                        image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23ddd'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='12' fill='%23777'%3EEducation%3C/text%3E%3C/svg%3E",
+                        expertise: ["EdTech Integration", "Digital Learning", "Instructional Design"],
+                        bio: "10+ years implementing technology in educational settings. Passionate about bridging the gap between education and technology.",
+                        videoId: "https://www.youtube.com/embed/6GEmgP8s2iM"
+                    }
+                ],
+                roadmap: [
+                    {
+                        year: "Year 1-2",
+                        title: "Foundation & Preparation",
+                        tasks: [
+                            "Complete bachelor's degree in education or subject area",
+                            "Gain classroom experience through observation and assistant roles",
+                            "Research state certification requirements",
+                            "Develop teaching philosophy and approach",
+                            "Build relationships with experienced educators"
+                        ]
+                    },
+                    {
+                        year: "Year 2-3",
+                        title: "Certification & Student Teaching",
+                        tasks: [
+                            "Complete required teacher certification program",
+                            "Finish student teaching practicum",
+                            "Develop classroom management skills",
+                            "Create sample lesson plans and materials",
+                            "Prepare for certification exams"
+                        ]
+                    },
+                    {
+                        year: "Year 3-4",
+                        title: "Early Teaching Career",
+                        tasks: [
+                            "Secure first teaching position",
+                            "Develop classroom routines and management strategies",
+                            "Adapt curriculum for diverse learners",
+                            "Build relationships with students and parents",
+                            "Join professional organizations"
+                        ]
+                    },
+                    {
+                        year: "Year 4-5",
+                        title: "Professional Development",
+                        tasks: [
+                            "Pursue additional certifications or endorsements",
+                            "Consider advanced education (master's degree)",
+                            "Develop specialized teaching expertise",
+                            "Take on leadership roles within school",
+                            "Mentor new teachers"
+                        ]
+                    },
+                    {
+                        year: "Year 5-6",
+                        title: "Career Advancement",
+                        tasks: [
+                            "Consider department chair or team lead positions",
+                            "Develop curriculum or instructional materials",
+                            "Present at conferences or workshops",
+                            "Explore administrative or specialist roles",
+                            "Consider doctoral education"
+                        ]
+                    },
+                    {
+                        year: "Year 6+",
+                        title: "Educational Leadership",
+                        tasks: [
+                            "Pursue administrative positions (principal, director)",
+                            "Develop expertise in educational policy",
+                            "Consider district-level leadership",
+                            "Engage in educational research",
+                            "Mentor educators at all levels"
+                        ]
+                    }
+                ]
+            },
+            engineering: {
+                title: "Engineering",
+                icon: "fas fa-cogs",
+                description: "Engineering careers apply scientific and mathematical principles to solve practical problems and create innovative solutions. This field offers diverse specialties with strong job prospects and competitive salaries.",
+                growth: "7% (As fast as average)",
+                demand: "Strong demand across most engineering disciplines",
+                jobs: [
+                    { title: "Civil Engineer", salary: "₹88,000" },
+                    { title: "Mechanical Engineer", salary: "₹90,000" },
+                    { title: "Electrical Engineer", salary: "₹101,000" },
+                    { title: "Chemical Engineer", salary: "₹108,000" },
+                    { title: "Biomedical Engineer", salary: "₹92,000" },
+                    { title: "Environmental Engineer", salary: "₹89,000" }
+                ],
+                education: "All engineering positions require at least a bachelor's degree from an ABET-accredited program. Professional Engineer (PE) licensure is valuable for career advancement, especially in civil engineering.",
+                skills: "Analytical thinking, problem-solving, mathematics, technical design, project management, communication, teamwork, attention to detail.",
+                educationPaths: {
+                    degrees: [
+                        "Bachelor's in Civil Engineering",
+                        "Bachelor's in Mechanical Engineering",
+                        "Bachelor's in Electrical Engineering",
+                        "Bachelor's in Chemical Engineering",
+                        "Master's in Engineering Management",
+                        "Bachelor's in Computer Engineering"
+                    ],
+                    certifications: [
+                        "Professional Engineer (PE) License",
+                        "Engineer in Training (EIT) Certification",
+                        "LEED Accreditation",
+                        "Project Management Professional (PMP)",
+                        "Six Sigma Certification",
+                        "SolidWorks Certification"
+                    ],
+                    resources: [
+                        "Khan Academy - Engineering mathematics",
+                        "Coursera - Engineering specializations",
+                        "edX - Engineering courses from top universities",
+                        "MIT OpenCourseWare - Free engineering courses",
+                        "Engineering.com - Industry news and resources",
+                        "ASCE - Civil engineering resources"
+                    ]
+                },
+                mentorship: [
+                    {
+                        name: "James Wilson",
+                        title: "Senior Civil Engineer",
+                        image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23ddd'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='12' fill='%23777'%3EEngineer%3C/text%3E%3C/svg%3E",
+                        expertise: ["Structural Engineering", "Project Management", "Infrastructure Design"],
+                        bio: "15+ years in civil engineering with expertise in large-scale infrastructure projects. PE licensed with experience mentoring EITs.",
+                        videoId: "https://www.youtube.com/embed/7Jn8t2k5s3M"
+                    },
+                    {
+                        name: "Dr. Maria Garcia",
+                        title: "Mechanical Engineering Researcher",
+                        image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23ddd'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='12' fill='%23777'%3EEngineer%3C/text%3E%3C/svg%3E",
+                        expertise: ["Robotics", "Product Design", "Manufacturing"],
+                        bio: "12+ years in mechanical engineering research and development. Holds multiple patents and specializes in sustainable design.",
+                        videoId: "https://www.youtube.com/embed/8Kp3sJ4l6tN"
+                    }
+                ],
+                roadmap: [
+                    {
+                        year: "Year 1-2",
+                        title: "Foundation & Fundamentals",
+                        tasks: [
+                            "Complete foundational engineering courses (math, physics)",
+                            "Develop proficiency with engineering software",
+                            "Join engineering student organizations",
+                            "Complete introductory engineering projects",
+                            "Explore different engineering specialties"
+                        ]
+                    },
+                    {
+                        year: "Year 2-3",
+                        title: "Specialization",
+                        tasks: [
+                            "Choose engineering discipline",
+                            "Take advanced courses in chosen field",
+                            "Complete specialized projects",
+                            "Develop technical writing skills",
+                            "Seek internship opportunities"
+                        ]
+                    },
+                    {
+                        year: "Year 3-4",
+                        title: "Professional Experience",
+                        tasks: [
+                            "Complete engineering internships",
+                            "Gain hands-on experience with industry tools",
+                            "Develop project management skills",
+                            "Work on team engineering projects",
+                            "Prepare for FE exam"
+                        ]
+                    },
+                    {
+                        year: "Year 4-5",
+                        title: "Entry-Level Career",
+                        tasks: [
+                            "Secure position as junior engineer",
+                            "Gain industry-specific knowledge",
+                            "Work toward PE licensure",
+                            "Develop professional network",
+                            "Continue technical skill development"
+                        ]
+                    },
+                    {
+                        year: "Year 5-6",
+                        title: "Career Advancement",
+                        tasks: [
+                            "Complete PE licensure process",
+                            "Take on more project responsibility",
+                            "Develop specialization within field",
+                            "Consider graduate education",
+                            "Mentor junior engineers"
+                        ]
+                    },
+                    {
+                        year: "Year 6+",
+                        title: "Established Engineer",
+                        tasks: [
+                            "Pursue senior or lead engineering positions",
+                            "Consider management or technical tracks",
+                            "Develop expertise in specialized area",
+                            "Consider entrepreneurship or consulting",
+                            "Contribute to professional organizations"
+                        ]
+                    }
+                ]
+            }
+        };
+
+        // Quiz functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const quizQuestions = [
+                {
+                    question: "What type of activities do you enjoy most?",
+                    options: [
+                        "Working with technology and computers",
+                        "Helping and caring for people",
+                        "Creating art or designing things",
+                        "Analyzing data and solving problems",
+                        "Teaching or explaining concepts to others",
+                        "Building or constructing things"
+                    ]
+                },
+                {
+                    question: "Which work environment do you prefer?",
+                    options: [
+                        "Office setting with modern technology",
+                        "Fast-paced, people-oriented environment",
+                        "Creative studio or flexible workspace",
+                        "Structured environment with clear procedures",
+                        "Educational setting like schools or training centers",
+                        "Field work with hands-on projects"
+                    ]
+                },
+                {
+                    question: "What are your strongest skills?",
+                    options: [
+                        "Technical and computer skills",
+                        "Communication and empathy",
+                        "Creativity and design thinking",
+                        "Analytical and logical reasoning",
+                        "Teaching and mentoring abilities",
+                        "Practical problem-solving and hands-on work"
+                    ]
+                },
+                {
+                    question: "Which subject did you enjoy most in school?",
+                    options: [
+                        "Computer Science or Math",
+                        "Psychology or Biology",
+                        "Art or Music",
+                        "Economics or Physics",
+                        "Education or Social Sciences",
+                        "Engineering or Shop Class"
+                    ]
+                }
+            ];
+
+            let currentQuestion = 0;
+            const progressBar = document.getElementById('progress-bar');
+            const questionElement = document.getElementById('question');
+            const optionsElement = document.getElementById('options');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const modal = document.getElementById('career-modal');
+            const closeModal = document.getElementById('close-modal');
+            const modalBody = document.getElementById('modal-body');
+            let currentCareer = null;
+
+            // Initialize quiz
+            loadQuestion();
+
+            // Event listeners for navigation
+            prevBtn.addEventListener('click', goToPreviousQuestion);
+            nextBtn.addEventListener('click', goToNextQuestion);
+
+            // Career card click events
+            document.querySelectorAll('.path-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    const careerType = card.getAttribute('data-career');
+                    showCareerDetails(careerType);
+                });
+            });
+
+            // Feature card click events
+            document.querySelectorAll('.feature-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    const feature = card.getAttribute('data-feature');
+                    const details = document.getElementById(`${feature}-details`);
+                    details.classList.toggle('active');
+                });
+            });
+
+            // Resource card click events
+            document.querySelectorAll('.resource-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    const resource = card.getAttribute('data-resource');
+                    const video = document.getElementById(`${resource}-video`);
+                    video.classList.toggle('active');
+                });
+            });
+
+            // FAQ functionality
+            document.querySelectorAll('.faq-question').forEach(question => {
+                question.addEventListener('click', () => {
+                    const answer = question.nextElementSibling;
+                    answer.classList.toggle('active');
+                    
+                    const icon = question.querySelector('i');
+                    if (answer.classList.contains('active')) {
+                        icon.classList.remove('fa-chevron-down');
+                        icon.classList.add('fa-chevron-up');
+                    } else {
+                        icon.classList.remove('fa-chevron-up');
+                        icon.classList.add('fa-chevron-down');
+                    }
+                });
+            });
+
+            // Close modal events
+            closeModal.addEventListener('click', () => {
+                modal.style.display = 'none';
+            });
+
+            window.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+
+            // Newsletter form submission
+            document.querySelector('.newsletter-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = this.querySelector('.newsletter-input').value;
+                alert(`Thank you for subscribing with ${email}! You'll receive our next newsletter soon.`);
+                this.reset();
+            });
+
+            // Load question function
+            function loadQuestion() {
+                updateProgressBar();
+                questionElement.textContent = quizQuestions[currentQuestion].question;
+                
+                // Clear options
+                optionsElement.innerHTML = '';
+                
+                // Add options
+                quizQuestions[currentQuestion].options.forEach(option => {
+                    const optionElement = document.createElement('div');
+                    optionElement.classList.add('quiz-option');
+                    optionElement.textContent = option;
+                    optionElement.addEventListener('click', function() {
+                        selectOption(this);
+                    });
+                    optionsElement.appendChild(optionElement);
+                });
+
+                // Update button states
+                prevBtn.disabled = currentQuestion === 0;
+                nextBtn.textContent = currentQuestion === quizQuestions.length - 1 ? 'See Results' : 'Next';
+            }
+
+            function goToPreviousQuestion() {
+                if (currentQuestion > 0) {
+                    currentQuestion--;
+                    loadQuestion();
+                }
+            }
+
+            function goToNextQuestion() {
+                if (currentQuestion < quizQuestions.length - 1) {
+                    currentQuestion++;
+                    loadQuestion();
+                } else {
+                    // Quiz completed - show results
+                    showQuizResults();
+                }
+            }
+
+            function updateProgressBar() {
+                const progress = ((currentQuestion + 1) / quizQuestions.length) * 100;
+                progressBar.style.width = `${progress}%`;
+            }
+
+            function selectOption(optionElement) {
+                // Remove selected class from all options
+                const allOptions = document.querySelectorAll('.quiz-option');
+                allOptions.forEach(option => option.classList.remove('selected'));
+                
+                // Add selected class to clicked option
+                optionElement.classList.add('selected');
+            }
+
+            function showQuizResults() {
+                const selectedOptions = document.querySelectorAll('.quiz-option.selected');
+                if (selectedOptions.length === 0) {
+                    alert('Please select an answer before proceeding!');
+                    return;
+                }
+
+                // Simple scoring algorithm based on selected options
+                const scores = {
+                    technology: 0,
+                    healthcare: 0,
+                    business: 0,
+                    creative: 0,
+                    education: 0,
+                    engineering: 0
+                };
+
+                // Score each selected option
+                selectedOptions.forEach(option => {
+                    const optionText = option.textContent;
+                    
+                    if (optionText.includes('technology') || optionText.includes('computer') || optionText.includes('math')) {
+                        scores.technology += 2;
+                    }
+                    if (optionText.includes('helping') || optionText.includes('people') || optionText.includes('psychology') || optionText.includes('biology')) {
+                        scores.healthcare += 2;
+                    }
+                    if (optionText.includes('creating') || optionText.includes('art') || optionText.includes('design')) {
+                        scores.creative += 2;
+                    }
+                    if (optionText.includes('analyzing') || optionText.includes('data') || optionText.includes('economics') || optionText.includes('physics')) {
+                        scores.business += 1;
+                        scores.technology += 1;
+                    }
+                    if (optionText.includes('teaching') || optionText.includes('explaining') || optionText.includes('education')) {
+                        scores.education += 2;
+                    }
+                    if (optionText.includes('building') || optionText.includes('constructing') || optionText.includes('engineering')) {
+                        scores.engineering += 2;
+                    }
+                });
+
+                // Find the career with highest score
+                let topCareer = 'technology';
+                let topScore = 0;
+
+                for (const career in scores) {
+                    if (scores[career] > topScore) {
+                        topScore = scores[career];
+                        topCareer = career;
+                    }
+                }
+
+                // Show results
+                alert(`Based on your answers, we recommend exploring careers in ${careerData[topCareer].title}. Click OK to view details.`);
+                showCareerDetails(topCareer);
+                
+                // Reset quiz
+                currentQuestion = 0;
+                loadQuestion();
+            }
+
+            function showCareerDetails(careerType) {
+                const career = careerData[careerType];
+                currentCareer = careerType;
+                
+                modalBody.innerHTML = `
+                    <div class="career-header">
+                        <i class="${career.icon} career-icon"></i>
+                        <h2 class="career-title">${career.title}</h2>
+                    </div>
+                    <p>${career.description}</p>
+                    
+                    <div class="career-details">
+                        <div class="detail-card">
+                            <h4><i class="fas fa-chart-line"></i> Job Growth & Demand</h4>
+                            <p><strong>Growth:</strong> ${career.growth}</p>
+                            <p><strong>Demand:</strong> ${career.demand}</p>
+                        </div>
+                        
+                        <div class="detail-card">
+                            <h4><i class="fas fa-graduation-cap"></i> Education Required</h4>
+                            <p>${career.education}</p>
+                        </div>
+                        
+                        <div class="detail-card">
+                            <h4><i class="fas fa-briefcase"></i> Popular Jobs & Salaries</h4>
+                            <ul class="job-list">
+                                ${career.jobs.map(job => `
+                                    <li>
+                                        <span>${job.title}</span>
+                                        <span class="salary">${job.salary}</span>
+                                    </li>
+                                `).join('')}
+                            </ul>
+                        </div>
+                        
+                        <div class="detail-card">
+                            <h4><i class="fas fa-tools"></i> Key Skills</h4>
+                            <p>${career.skills}</p>
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 30px;">
+                        <button class="btn" id="explore-education">Explore Education Paths</button>
+                        <button class="btn" id="explore-mentorship" style="margin-left: 10px;">Mentorship Programs</button>
+                        <button class="btn" id="explore-roadmap" style="margin-left: 10px;">Career Roadmap</button>
+                    </div>
+                    
+                    <div class="education-paths" id="education-paths">
+                        <h3>Education Paths for ${career.title}</h3>
+                        
+                        <div class="education-tabs">
+                            <button class="education-tab active" data-tab="degrees">Degree Programs</button>
+                            <button class="education-tab" data-tab="certifications">Certifications</button>
+                            <button class="education-tab" data-tab="resources">Learning Resources</button>
+                        </div>
+                        
+                        <div class="education-content active" id="degrees-content">
+                            <div class="education-card">
+                                <h4><i class="fas fa-graduation-cap"></i> Recommended Degree Programs</h4>
+                                <ul class="education-list">
+                                    ${career.educationPaths.degrees.map(degree => `
+                                        <li><i class="fas fa-check"></i> ${degree}</li>
+                                    `).join('')}
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="education-content" id="certifications-content">
+                            <div class="education-card">
+                                <h4><i class="fas fa-certificate"></i> Valuable Certifications</h4>
+                                <ul class="education-list">
+                                    ${career.educationPaths.certifications.map(cert => `
+                                        <li><i class="fas fa-award"></i> ${cert}</li>
+                                    `).join('')}
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="education-content" id="resources-content">
+                            <div class="education-card">
+                                <h4><i class="fas fa-book-open"></i> Learning Resources</h4>
+                                <ul class="education-list">
+                                    ${career.educationPaths.resources.map(resource => `
+                                        <li><i class="fas fa-link"></i> ${resource}</li>
+                                    `).join('')}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mentorship-programs" id="mentorship-programs">
+                        <h3>Mentorship Programs for ${career.title}</h3>
+                        <p>Connect with experienced professionals who can guide you in your career journey:</p>
+                        
+                        ${career.mentorship.map(mentor => `
+                            <div class="mentor-card">
+                                <img src="${mentor.image}" alt="${mentor.name}" class="mentor-image">
+                                <div class="mentor-info">
+                                    <h4>${mentor.name}</h4>
+                                    <div class="mentor-title">${mentor.title}</div>
+                                    <div class="mentor-expertise">
+                                        ${mentor.expertise.map(exp => `<span class="expertise-tag">${exp}</span>`).join('')}
+                                    </div>
+                                    <p>${mentor.bio}</p>
+                                    <button class="btn" style="margin-top: 10px;">Request Mentorship</button>
+                                    <div class="mentor-video">
+                                        <iframe src="${mentor.videoId}" title="${mentor.name} - ${mentor.title}" allowfullscreen></iframe>
+                                    </div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <div class="career-roadmap" id="career-roadmap">
+                        <h3>Career Roadmap for ${career.title}</h3>
+                        <p>Follow this step-by-step guide to build a successful career in ${career.title}:</p>
+                        
+                        <div class="roadmap-container">
+                            ${career.roadmap.map(step => `
+                                <div class="roadmap-item">
+                                    <div class="roadmap-year">${step.year}</div>
+                                    <div class="roadmap-content">
+                                        <h4>${step.title}</h4>
+                                        <ul>
+                                            ${step.tasks.map(task => `<li>${task}</li>`).join('')}
+                                        </ul>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+                
+                // Add event listeners for the new elements
+                document.getElementById('explore-education').addEventListener('click', function() {
+                    document.getElementById('education-paths').style.display = 'block';
+                    document.getElementById('mentorship-programs').style.display = 'none';
+                    document.getElementById('career-roadmap').style.display = 'none';
+                });
+                
+                document.getElementById('explore-mentorship').addEventListener('click', function() {
+                    document.getElementById('education-paths').style.display = 'none';
+                    document.getElementById('mentorship-programs').style.display = 'block';
+                    document.getElementById('career-roadmap').style.display = 'none';
+                });
+                
+                document.getElementById('explore-roadmap').addEventListener('click', function() {
+                    document.getElementById('education-paths').style.display = 'none';
+                    document.getElementById('mentorship-programs').style.display = 'none';
+                    document.getElementById('career-roadmap').style.display = 'block';
+                });
+                
+                // Tab functionality
+                document.querySelectorAll('.education-tab').forEach(tab => {
+                    tab.addEventListener('click', function() {
+                        const tabName = this.getAttribute('data-tab');
+                        
+                        // Update active tab
+                        document.querySelectorAll('.education-tab').forEach(t => {
+                            t.classList.remove('active');
+                        });
+                        this.classList.add('active');
+                        
+                        // Show relevant content
+                        document.querySelectorAll('.education-content').forEach(content => {
+                            content.classList.remove('active');
+                        });
+                        document.getElementById(`${tabName}-content`).classList.add('active');
+                    });
+                });
+                
+                modal.style.display = 'block';
+            }
+
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
